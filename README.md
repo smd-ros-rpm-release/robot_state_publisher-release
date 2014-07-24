@@ -1,3 +1,24 @@
+## robot_state_publisher (hydro) - 1.9.11-0
+
+The packages in the `robot_state_publisher` repository were released into the `hydro` distro by running `/usr/local/bin/bloom-release -r hydro -t hydro robot_state_publisher` on `Thu, 24 Jul 2014 21:18:52 -0000`
+
+The `robot_state_publisher` package was released.
+
+Version of package(s) in repository `robot_state_publisher`:
+- upstream repository: https://github.com/ros/robot_state_publisher.git
+- release repository: https://github.com/ros-gbp/robot_state_publisher-release.git
+- rosdistro version: `1.9.10-0`
+- old version: `1.9.10-0`
+- new version: `1.9.11-0`
+
+Versions of tools used:
+- bloom version: `0.5.11-dev`
+- catkin_pkg version: `0.2.2`
+- rosdep version: `0.10.27`
+- rosdistro version: `0.3.5`
+- vcstools version: `0.1.35`
+
+
 ## robot_state_publisher (indigo) - 1.10.2-0
 
 User `isucan@isucan-glaptop0` released the packages in the `robot_state_publisher` repository into the `indigo` distro by running `/usr/bin/bloom-release -t indigo -r indigo robot_state_publisher` on `Mon, 03 Mar 2014 08:49:46 -0000`
