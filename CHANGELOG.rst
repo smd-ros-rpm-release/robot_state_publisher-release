@@ -2,8 +2,9 @@
 Changelog for package robot_state_publisher
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.10.0 (2014-03-03)
+1.9.11 (2014-07-24)
 -------------------
-* minor style fixes
-* Add support for mimic tag.
-* Contributors: Ioan Sucan, Konrad Banachowicz
+* Update KDL SegmentMap interface to optionally use shared pointers
+  The KDL Tree API optionally uses shared pointers on platforms where
+  the STL containers don't support incomplete types.
+* Contributors: Brian Jensen, Ioan A Sucan

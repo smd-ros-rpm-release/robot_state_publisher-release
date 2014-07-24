@@ -34,7 +34,6 @@
 
 /* Author: Wim Meeussen */
 
-#include <urdf/model.h>
 #include <kdl/tree.hpp>
 #include <ros/ros.h>
 #include "robot_state_publisher/robot_state_publisher.h"
@@ -47,8 +46,9 @@ using namespace ros;
 using namespace KDL;
 using namespace robot_state_publisher;
 
-JointStateListener::JointStateListener(const KDL::Tree& tree, const MimicMap& m)
-  : state_publisher_(tree), mimic_(m)
+
+JointStateListener::JointStateListener(const KDL::Tree& tree)
+  : state_publisher_(tree)
 {
   ros::NodeHandle n_tilde("~");
   ros::NodeHandle n;
@@ -104,14 +104,6 @@ void JointStateListener::callbackJointState(const JointStateConstPtr& state)
     map<string, double> joint_positions;
     for (unsigned int i=0; i<state->name.size(); i++)
       joint_positions.insert(make_pair(state->name[i], state->position[i]));
-
-    for(MimicMap::iterator i = mimic_.begin(); i != mimic_.end(); i++){
-      if(joint_positions.find(i->second->joint_name) != joint_positions.end()){
-        double pos = joint_positions[i->second->joint_name] * i->second->multiplier + i->second->offset;
-        joint_positions.insert(make_pair(i->first, pos));
-      }
-    }
-
     state_publisher_.publishTransforms(joint_positions, state->header.stamp, tf_prefix_);
 
     // store publish time in joint map
@@ -119,6 +111,10 @@ void JointStateListener::callbackJointState(const JointStateConstPtr& state)
       last_publish_time_[state->name[i]] = state->header.stamp;
   }
 }
+
+
+
+
 
 // ----------------------------------
 // ----- MAIN -----------------------
@@ -129,7 +125,7 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "robot_state_publisher");
   NodeHandle node;
   std::cout <<argv[0] << std::endl;
-
+  
   ///////////////////////////////////////// begin deprecation warning
   std::string exe_name = argv[0];
   std::size_t slash = exe_name.find_last_of("/");
@@ -140,23 +136,13 @@ int main(int argc, char** argv)
   ///////////////////////////////////////// end deprecation warning
 
   // gets the location of the robot description on the parameter server
-  urdf::Model model;
-  model.initParam("robot_description");
   KDL::Tree tree;
-  if (!kdl_parser::treeFromUrdfModel(model, tree)){
+  if (!kdl_parser::treeFromParam("robot_description", tree)){
     ROS_ERROR("Failed to extract kdl tree from xml robot description");
     return -1;
   }
 
-  MimicMap mimic;
-
-  for(std::map< std::string, boost::shared_ptr< urdf::Joint > >::iterator i = model.joints_.begin(); i != model.joints_.end(); i++){
-    if(i->second->mimic){
-      mimic.insert(make_pair(i->first, i->second->mimic));
-    }
-  }
-
-  JointStateListener state_publisher(tree, mimic);
+  JointStateListener state_publisher(tree);
   ros::spin();
 
   return 0;
