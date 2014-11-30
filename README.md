@@ -1,3 +1,24 @@
+## robot_state_publisher (indigo) - 1.10.4-0
+
+The packages in the `robot_state_publisher` repository were released into the `indigo` distro by running `/usr/bin/bloom-release -t indigo -r indigo robot_state_publisher` on `Sun, 30 Nov 2014 19:10:05 -0000`
+
+The `robot_state_publisher` package was released.
+
+Version of package(s) in repository `robot_state_publisher`:
+- upstream repository: https://github.com/ros/robot_state_publisher.git
+- release repository: https://github.com/ros-gbp/robot_state_publisher-release.git
+- rosdistro version: `1.10.3-0`
+- old version: `1.10.3-0`
+- new version: `1.10.4-0`
+
+Versions of tools used:
+- bloom version: `0.5.14`
+- catkin_pkg version: `0.2.6`
+- rosdep version: `0.10.33`
+- rosdistro version: `0.3.6`
+- vcstools version: `0.1.35`
+
+
 ## robot_state_publisher (indigo) - 1.10.3-0
 
 The packages in the `robot_state_publisher` repository were released into the `indigo` distro by running `/usr/local/bin/bloom-release -r indigo -t indigo robot_state_publisher` on `Thu, 24 Jul 2014 21:59:08 -0000`
