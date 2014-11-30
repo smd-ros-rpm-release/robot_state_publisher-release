@@ -71,7 +71,6 @@ private:
   robot_state_publisher::RobotStatePublisher state_publisher_;
   Subscriber joint_state_sub_;
   ros::Timer timer_;
-  ros::Time last_callback_time_;
   std::map<std::string, ros::Time> last_publish_time_;
   MimicMap mimic_;
 
